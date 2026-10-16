@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventora | Event Registration & Ticketing</title>
+
+<style>
+:root {
+    --purple: #6c4cff;
+    --pink: #ff5c9a;
+    --orange: #ffb547;
+    --mint: #a9f4d0;
+    --dark: #19152f;
+    --gray: #706b83;
+    --bg: #fbfaff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--dark);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* NAVIGATION */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--purple);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+nav a:hover {
+    color: var(--pink);
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    color: white;
+    background: linear-gradient(110deg, var(--purple), var(--pink));
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #6c4cff40;
+}
+
+.btn-dark {
+    color: white;
+    background: var(--dark);
+}
+
+/* HERO SECTION */
+
+.hero {
+    min-height: 490px;
+    padding: 65px 7%;
+    border-radius: 30px;
+    background: linear-gradient(120deg, #eee9ff, #fff0f6, #fff4de);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.badge {
+    display: inline-block;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    color: var(--purple);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1.08;
+    margin: 22px 0;
+    letter-spacing: -2px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--gray);
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ticket-preview {
+    background: white;
+    border-radius: 25px;
+    padding: 18px;
+    box-shadow: 0 25px 60px #39265c20;
+    transform: rotate(3deg);
+}
+
+.ticket-art {
+    background: linear-gradient(135deg, var(--purple), #a35cff, var(--pink));
+    color: white;
+    padding: 30px;
+    height: 220px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ticket-art h2 {
+    font-size: 36px;
+}
+
+.ticket-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5px 5px;
+    gap: 10px;
+}
+
+.ticket-info strong {
+    display: block;
+    margin-top: 8px;
+}
+
+.price {
+    color: var(--purple);
+    font-weight: bold;
+}
+
+/* SECTION COMMON */
+
+section {
+    padding: 75px 0;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading span {
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.section-heading h2 {
+    font-size: 38px;
+    margin: 12px 0;
+}
+
+.section-heading p {
+    color: var(--gray);
+    line-height: 1.7;
+}
+
+/* FILTER BUTTONS */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 11px 18px;
+    background: white;
+    border: 1px solid #e8e3f5;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--dark);
+    color: white;
+}
+
+/* EVENT CARDS */
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #eeeaf6;
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 35px #20123a12;
+}
+
+.event-image {
+    height: 175px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.purple {
+    background: linear-gradient(135deg, #5541d9, #a35cff);
+}
+
+.pink {
+    background: linear-gradient(135deg, #ff5c9a, #ff9b72);
+}
+
+.green {
+    background: linear-gradient(135deg, #087f8c, #4bd5b4);
+}
+
+.orange {
+    background: linear-gradient(135deg, #f39b20, #ffcf69);
+}
+
+.blue {
+    background: linear-gradient(135deg, #222044, #6c4cff);
+}
+
+.rose {
+    background: linear-gradient(135deg, #d14b76, #8e5cff);
+}
+
+.event-content {
+    padding: 22px;
+}
+
+.event-date {
+    color: var(--purple);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.event-content h3 {
+    margin: 12px 0;
+    font-size: 21px;
+}
+
+.event-content p {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #eeeaf6;
+    padding-top: 15px;
+}
+
+.register-btn {
+    background: #f0edff;
+    color: var(--purple);
+    border: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    background: var(--purple);
+    color: white;
+}
+
+/* FEATURES */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 28px;
+    background: white;
+    border: 1px solid #eeeaf6;
+    border-radius: 20px;
+}
+
+.feature-icon {
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--gray);
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* CALL TO ACTION */
+
+.cta {
+    padding: 50px;
+    background: linear-gradient(110deg, #241b54, var(--purple), #a15bff);
+    border-radius: 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.cta h2 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.cta p {
+    color: #e0d9ff;
+    line-height: 1.7;
+}
+
+.cta .btn {
+    background: white;
+    color: var(--purple);
+    white-space: nowrap;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 35px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* REGISTRATION MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #17122ccc;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 470px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    background: #f0edff;
+    border: none;
+    border-radius: 9px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e5e0f0;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--purple);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.total-price {
+    background: #f5f1ff !important;
+    color: var(--purple);
+    font-weight: bold;
+}
+
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-message.show {
+    display: block;
+}
+
+.success-icon {
+    width: 65px;
+    height: 65px;
+    background: #dcfff0;
+    color: #089b65;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 35px;
+    margin: 0 auto 20px;
+}
+
+.note {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 12px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 850px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 45px 7%;
+    }
+
+    .event-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 560px) {
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+    .cta {
+        padding: 30px;
+    }
+
+    .cta h2 {
+        font-size: 27px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="container">
+    <a href="#" class="logo">✦ Eventora</a>
+
+    <nav>
+        <a href="#events">Explore Events</a>
+        <a href="#features">Why Eventora</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <a href="#events" class="btn btn-primary">Find Events ↗</a>
+</header>
+
+<main>
+
+<!-- HERO SECTION -->
+<div class="container">
+<section class="hero">
+
+    <div>
+        <span class="badge">✦ YOUR NEXT EXPERIENCE STARTS HERE</span>
+
+        <h1>
+            Make Plans.<br>
+            <span class="gradient-text">Make Memories.</span>
+        </h1>
+
+        <p>
+            Discover exciting events, book your tickets in seconds,
+            and spend more time doing what you love. Your next
+            unforgettable moment is just a click away.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#events" class="btn btn-primary">
+                Explore Events →
+            </a>
+
+            <a href="#features" class="btn btn-dark">
+                How It Works
+            </a>
+        </div>
+    </div>
+
+    <div class="ticket-preview">
+        <div class="ticket-art">
+            <span>EVENTORA PRESENTS</span>
+            <h2>Ideas in<br>Full Colour.</h2>
+            <span>CREATE · CONNECT · CELEBRATE</span>
+        </div>
+
+        <div class="ticket-info">
+            <div>
+                📅 DATE & TIME
+                <strong>Saturday · 10:00 AM</strong>
+            </div>
+
+            <div class="price">₹499</div>
+        </div>
+    </div>
+
+</section>
+</div>
+
+<!-- EVENTS SECTION -->
+<section class="container" id="events">
+
+    <div class="section-heading">
+        <span>Find Your People</span>
+        <h2>Events Worth Showing Up For.</h2>
+        <p>
+            From big ideas to good music, find something that inspires you.
+        </p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">
+            All Events
+        </button>
+
+        <button class="filter-btn" data-filter="technology">
+            Technology
+        </button>
+
+        <button class="filter-btn" data-filter="music">
+            Music
+        </button>
+
+        <button class="filter-btn" data-filter="design">
+            Design
+        </button>
+
+        <button class="filter-btn" data-filter="business">
+            Business
+        </button>
+
+        <button class="filter-btn" data-filter="gaming">
+            Gaming
+        </button>
+    </div>
+
+    <div class="event-grid" id="eventGrid">
+
+        <!-- EVENT 1 -->
+        <article class="event-card" data-category="technology">
+            <div class="event-image purple">
+                💻 TECHNOLOGY & INNOVATION
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">NOV 14, 2026 · 10:00 AM</span>
+                <h3>FutureTech Summit</h3>
+
+                <p>
+                    Explore AI, emerging technologies, and innovative
+                    ideas shaping tomorrow.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Innovation Hall</small>
+                        <h3 class="price">₹499</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="FutureTech Summit"
+                        data-price="499">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- EVENT 2 -->
+        <article class="event-card" data-category="music">
+            <div class="event-image pink">
+                🎵 LIVE MUSIC FESTIVAL
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">NOV 21, 2026 · 6:30 PM</span>
+                <h3>Neon Nights Festival</h3>
+
+                <p>
+                    Experience live performances, exciting music,
+                    and unforgettable energy.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Riverside Arena</small>
+                        <h3 class="price">₹799</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="Neon Nights Festival"
+                        data-price="799">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- EVENT 3 -->
+        <article class="event-card" data-category="design">
+            <div class="event-image green">
+                🎨 CREATIVE WORKSHOP
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">NOV 28, 2026 · 11:00 AM</span>
+                <h3>Design Playground</h3>
+
+                <p>
+                    Meet creative minds, explore visual design,
+                    and learn new creative skills.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Creative Studio</small>
+                        <h3 class="price">₹299</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="Design Playground"
+                        data-price="299">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- EVENT 4 -->
+        <article class="event-card" data-category="business">
+            <div class="event-image orange">
+                🚀 STARTUP & NETWORKING
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">DEC 05, 2026 · 9:30 AM</span>
+                <h3>Startup Spark</h3>
+
+                <p>
+                    Connect with founders, share ideas,
+                    and discover new opportunities.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Launchpad Centre</small>
+                        <h3 class="price">₹399</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="Startup Spark"
+                        data-price="399">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- EVENT 5 -->
+        <article class="event-card" data-category="gaming">
+            <div class="event-image blue">
+                🎮 GAMING TOURNAMENT
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">DEC 12, 2026 · 2:00 PM</span>
+                <h3>Pixel Battle Arena</h3>
+
+                <p>
+                    Join a friendly gaming tournament filled
+                    with fun and challenges.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Level Up Lounge</small>
+                        <h3 class="price">₹249</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="Pixel Battle Arena"
+                        data-price="249">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- EVENT 6 -->
+        <article class="event-card" data-category="technology">
+            <div class="event-image rose">
+                ⚡ CODING WORKSHOP
+            </div>
+
+            <div class="event-content">
+                <span class="event-date">DEC 19, 2026 · 10:30 AM</span>
+                <h3>Code & Create Lab</h3>
+
+                <p>
+                    Build a mini project, solve coding challenges,
+                    and learn with other developers.
+                </p>
+
+                <div class="event-footer">
+                    <div>
+                        <small>📍 Digital Works Lab</small>
+                        <h3 class="price">₹199</h3>
+                    </div>
+
+                    <button class="register-btn"
+                        data-event="Code & Create Lab"
+                        data-price="199">
+                        Get Tickets ↗
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="container" id="features">
+
+    <div class="section-heading">
+        <span>Simple and Convenient</span>
+        <h2>Everything You Need to Go.</h2>
+        <p>
+            A smoother way to discover events and manage your registration.
+        </p>
+    </div>
+
+    <div class="features">
+
+        <div class="feature-card">
+            <div class="feature-icon">🔎</div>
+            <h3>Discover Events</h3>
+            <p>
+                Explore different events and find experiences
+                that match your interests.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎟️</div>
+            <h3>Easy Ticket Booking</h3>
+            <p>
+                Select your event, choose the number of tickets,
+                and complete the registration form.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Booking Confirmation</h3>
+            <p>
+                View your registration confirmation and ticket
+                details after submitting the form.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="container" id="about">
+    <div class="cta">
+        <div>
+            <h2>Your Next Story Starts with a Ticket.</h2>
+            <p>
+                Find something new, invite your people,
+                and make it a day to remember.
+            </p>
+        </div>
+
+        <a href="#events" class="btn">
+            Browse All Events →
+        </a>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="container">
+    <a href="#" class="logo">✦ Eventora</a>
+
+    <p>© 2026 Eventora. Made for memorable moments.</p>
+
+    <div class="footer-links">
+        <a href="#events">Events</a>
+        <a href="#features">Features</a>
+        <a href="mailto:hello@example.com">Contact</a>
+    </div>
+</footer>
+
+<!-- REGISTRATION MODAL -->
+<div class="modal" id="bookingModal"
+     role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle">
+
+    <div class="modal-content">
+
+        <button class="close-btn" id="closeModal"
+                aria-label="Close">&times;</button>
+
+        <div id="bookingFormSection">
+
+            <h2 id="modalTitle">Event Registration</h2>
+
+            <p id="selectedEventText">
+                Complete your details to reserve your tickets.
+            </p>
+
+            <form id="bookingForm">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName"
+                           name="name" required
+                           placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email"
+                           name="email" required
+                           placeholder="you@example.com">
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="quantity">Number of Tickets</label>
+
+                        <select id="quantity" name="quantity">
+                            <option value="1">1 Ticket</option>
+                            <option value="2">2 Tickets</option>
+                            <option value="3">3 Tickets</option>
+                            <option value="4">4 Tickets</option>
+                            <option value="5">5 Tickets</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="totalPrice">Total Price</label>
+                        <input type="text" id="totalPrice"
+                               class="total-price"
+                               value="₹499" readonly>
+                    </div>
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary"
+                        style="width:100%">
+                    Confirm Registration →
+                </button>
+
+                <div class="note">
+                    Demo only. No payment is processed, and
+                    registrations are not saved to a server.
+                </div>
+
+            </form>
+        </div>
+
+        <!-- SUCCESS MESSAGE -->
+        <div class="success-message" id="successMessage">
+
+            <div class="success-icon">✓</div>
+
+            <h2>Registration Successful!</h2>
+
+            <p id="confirmationDetails"></p>
+
+            <button class="btn btn-primary" id="doneBtn">
+                Back to Events
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+// EVENT CATEGORY FILTERS
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+const eventCards = document.querySelectorAll(".event-card");
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        const selectedCategory = button.dataset.filter;
+
+        eventCards.forEach(card => {
+            const category = card.dataset.category;
+
+            card.style.display =
+                selectedCategory === "all" ||
+                selectedCategory === category
+                    ? "block"
+                    : "none";
+        });
+    });
+});
+
+
+// REGISTRATION MODAL
+
+const modal = document.getElementById("bookingModal");
+const closeModal = document.getElementById("closeModal");
+const bookingForm = document.getElementById("bookingForm");
+const quantity = document.getElementById("quantity");
+const totalPrice = document.getElementById("totalPrice");
+
+let selectedEvent = "";
+let selectedPrice = 0;
+
+
+// OPEN REGISTRATION FORM
+
+document.querySelectorAll(".register-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        selectedEvent = button.dataset.event;
+        selectedPrice = Number(button.dataset.price);
+
+        document.getElementById("modalTitle").textContent =
+            "Register for " + selectedEvent;
+
+        document.getElementById("selectedEventText").textContent =
+            "Complete your details to book tickets for " +
+            selectedEvent + ".";
+
+        bookingForm.reset();
+
+        quantity.value = "1";
+
+        updateTotalPrice();
+
+        document.getElementById("bookingFormSection")
+            .style.display = "block";
+
+        document.getElementById("successMessage")
+            .classList.remove("show");
+
+        modal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+        document.getElementById("fullName").focus();
+    });
+
+});
+
+
+// CALCULATE TICKET PRICE
+
+function updateTotalPrice() {
+
+    const numberOfTickets = Number(quantity.value);
+
+    const total = selectedPrice * numberOfTickets;
+
+    totalPrice.value = "₹" + total.toLocaleString("en-IN");
+}
+
+quantity.addEventListener("change", updateTotalPrice);
+
+
+// CLOSE MODAL
+
+function closeBookingModal() {
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+closeModal.addEventListener("click", closeBookingModal);
+
+document.getElementById("doneBtn")
+    .addEventListener("click", closeBookingModal);
+
+modal.addEventListener("click", event => {
+    if (event.target === modal) {
+        closeBookingModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeBookingModal();
+    }
+});
+
+
+// SUBMIT REGISTRATION FORM
+
+bookingForm.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const formData = new FormData(bookingForm);
+
+    const name = formData.get("name").trim();
+    const email = formData.get("email").trim();
+    const tickets = Number(formData.get("quantity"));
+
+    if (!name || !email || tickets < 1) {
+        alert("Please complete all required fields.");
+        return;
+    }
+
+    const total = selectedPrice * tickets;
+
+    document.getElementById("bookingFormSection")
+        .style.display = "none";
+
+    document.getElementById("confirmationDetails").textContent =
+        "Thank you, " + name +
+        "! Your demo registration for " + selectedEvent +
+        " has been confirmed. Tickets: " + tickets +
+        ". Total: ₹" + total.toLocaleString("en-IN") +
+        ". Confirmation email: " + email +
+        ". No payment has been taken.";
+
+    document.getElementById("successMessage")
+        .classList.add("show");
+
+});
+
+</script>
+
+</body>
+</html>
